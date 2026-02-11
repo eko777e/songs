@@ -14,52 +14,52 @@
     "env": {
       "API_ID": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "",
+        "value": "27522024",
         "required": true
       },
       "API_HASH": {
         "description": "Get this value from https://my.telegram.org",
-        "value": "",
+        "value": "8931b9c53bca83b39990662fa934be54",
         "required": true
       },
       "BOT_TOKEN": {
         "description": "A Bot's token from Botfather",
-        "value": "",
+        "value": "5366398706:AAF5bkA50EaGrFqDPmuD2m_OdYC-S2rg1Ms",
         "required": true
       },
       "MONGO_DB_URI": {
         "description": "Get a mongodb url from https://cloud.mongodb.com.",
-        "value": "",
+        "value": "mongodb+srv://agautevdragitevsvh:pJSptT6jE0pcw9a4@cluster0.de4uc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0",
         "required": true
       },
       "OWNER_ID": {
         "description": "The user id of user whom you would like to add as OWNER.",
-        "value": "",
+        "value": "8132426159",
         "required": true
       },
       "STRING_SESSION": {
         "description": "A Pyrogram v2 String Session .",
-        "value": "",
+        "value": "AgFwyZ4ArS4-ZOcBjOgV9GeK_h1BWqrnY0Tj1c_xKRtkRdB1OPtFsGcrPVJCbdI0oEdIDreguaGSlqWVugGL5KZcCGFFgLUYBsRfZQLg_7ASgbMCRn4S4HRFTLfE_55roinXGBNaMpYiYGiakVTGaABgnFK7WRQgsungsisS2DTc_kt1YGzezaYgXgJ0A5c0hpxvU_W8GGtIgFDVfuE9fe5BnROTq4IE75G4PwhFmCnCzRVs8bSAHmCx7q36zQYq71NDgJ-Lk9chc2u25WEt3trkxXCfCpIovDM8dcSGqVqqVmWHi7hVspykyN4YRI3tNNbBcm7r-G-8DBHiPnyM-_u4hIUUFQAAAAH6RXzmAA",
         "required": true
       },
       "QUEUE_LIMIT": {
         "description": "Fill Queue Limit . Example - 15",
-        "value": "",
+        "value": "15",
         "required": false
       },
       "HEROKU_API_KEY": {
         "description": "Your Heroku account's API key",
-        "value": "",
+        "value": "HRKU-AAdPH7_nWkFVf8RyVBkkCjtONJc7sbRbCacmP7eUTOcA_____wOZSRzZHeuk",
         "required": false
       },
       "HEROKU_APP_NAME": {
         "description": "Your heroku app name",
-        "value": "",
+        "value": "xmurs",
         "required": false
       },
       "LOG_GROUP_ID": {
         "description": "Your Log Group ID, add your bot and promote as an admin with full rights!. Do not ever try to put channel ID here.",
-        "value": "",
+        "value": "-1003700355700",
         "required": true
       }
     },
@@ -76,3 +76,12 @@
       ],
       "stack": "container"
   }
+
+
+
+
+
+
+
+
+
