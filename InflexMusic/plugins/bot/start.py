@@ -20,7 +20,7 @@ from InflexMusic.utils.database import (
 )
 from InflexMusic.utils.decorators.language import LanguageStart
 from InflexMusic.utils.formatters import get_readable_time
-from InflexMusic.utils.inline import help_pannel, private_panel, start_panel
+from InflexMusic.utils.inline import help_pannel, private_panel
 from config import BANNED_USERS
 from strings import get_string
 
@@ -156,3 +156,4 @@ async def welcome(client, message: Message):
 
         except Exception as ex:
             print(ex)
+
