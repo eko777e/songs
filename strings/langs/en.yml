@@ -170,7 +170,7 @@ queue_6 : "<b>⏰ Müddət :</b>Naməlum müddətli yayım\n\n<b>Bütün növbə
 queue_7 : "🔃 Bütün növbə siyahısını əldə etmək üçün aşağıdakı düyməni vurun."
 queue_8 : "🙋🏻‍♀️ <b>{0} Oxuyur</b>\n\n🌐 <b>Yayım :</b> {1}\n\n <b>💁🏻‍♀️ Yayım növü :</b> {2}"
 
-stream_1 : "🎧 <b>Musiqi başladıldı...</b>\n\n<b>🎵 Başlıq :</b> {0}\n<b>⏰ Müddət :</b> {2}\n<b>🙋🏻‍♀️ İcra Edən :</b> {3}"
+stream_1 : "🎧 <b>Musiqi başladıldı...</b>\n\n<b>🎵 Başlıq :</b> {1}\n<b>⏰ Müddət :</b> {2}\n<b>🙋🏻‍♀️ İcra Edən :</b> {3}"
 stream_2 : "🎵 <b>Yayım Başladı...</b>\n\n<b>💁🏻‍♀️ Axın növü :</b> Canlı yayım [ 𝖴𝗋𝗅 ]\n<b>🙋🏻‍♀️ İcra Edən :</b> {0}"
 
 CLOSE_BUTTON  : "❌ Bağla"
@@ -303,6 +303,7 @@ gban_9: "» {0} tərəfindən ümumi qadağa götürüldü.\n\n{1} söhbətdən 
 gban_10: "» Heç bir istifadəçi bot tərəfindən ümumi qadağan olunmayıb."
 gban_11: "» Ümumi qadağan olunmuş istifadəçilər siyahısı yüklənir..."
 gban_12: "<b>Ümumi Qadağan Olunmuş İstifadəçilər:</b>\n\n"
+
 
 
 
