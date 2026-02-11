@@ -81,13 +81,13 @@ admin_39: "1 səs silindi."
 admin_40: "Səs verildi."
 
 start_1 : "🙋🏻‍♀️ <b>ByTaGi Music🇦🇿</b> aktifdir...\n📢 Rəsmi kanal: @BotAzNews"
-start_2 : "Salam 🙋🏻‍♀️\nMən <b>MyTaGi Music</b>🇦🇿 botuyam\nMəni Qrupunuza əlavə edərək səsli yayımda musiqi dinləyə bilərsiniz 💁🏻‍♀️\n<b>Mənim Əmrlərim:</b>\n\n/play - musiqi oxudar\n/skip - musiqini keçər\n/stop • /end - musiqini dayandırar."
+start_2 : "🙋🏻‍♀️ Salam {0}\n🤖 Mənim adım <b>ByTaGi Music🇦🇿</b>\n🎵 Mən qruplar üçün yaradılmış səs yayım botuyam\n💁🏻‍♀️ Məni qrupunuza əlavə edərək musiqinin kefini çıxardın\n📚 Əmrlərim üçün komandlar buttonuna klikləyin"
 start_3 : "Salam {0} 🙋🏻‍♀️ ,\nMəni Qrupa əlavə etdiyiniz üçün təşəkkürliyimizi bildirərəm 😉\n<b> ByTaGi Music🇦🇿</b> daim aktif və donmasız şəkildə nəzarətinizdədir.."
 start_4 : "⚠️ Məni ilk öncə istifadə etmək üçün qrupunuz SuperGroup olmalıdı\n✅ Qrupunuzu SuperGroup edib yenidən cəhd edin\n😐 Qrupu tərk etmək məcburiyyətindəyəm..."
 start_5 : "<b>Blok edilmiş söhbət ⚠️</b>\nSizin qrup bot bazasında blok edilib, Səbəbini bilmək üçün @BotAzDestek qrupuna bildirin.."
 start_6 : "🎧 <b>Mahnı infosu</b>\n\n🎵 <b>Başlıq :</b> {0}\n\n⏰ <b>Müddət :</b> {1}\n👀 <b>Baxış :</b> <code>{2}</code>\n🔃 <b>Yayımlanma tarixi :</b> {3}\n📢 <b>Kanal :</b> <a href={4}>{5}</a>\n"
 
-help_1: "<b>Əmrləri və təlimatları görmək üçün aşağıdakı düymələrdən istifadə edin.</b>\n\n<b>Qrup üzvləri yalnız istifadəçi əmrlərinə baxmalıdır, qrup administratorları isə admin əmrlərinə nəzarət etməlidir.</b>\n\n<b>Yardım üçün <a href={0}>dəstəyə</a> yaza bilərsiniz</b>"
+help_1: "🔮 <b>Komanda:</b> /play\n📜 <b>Nümunə:</b> <code>/play Eşqin Gəmisi</code>\n📚 <b>Açıqlama:</b> Səsli axın üçün musiqi oxudar\n\n🔮 <b>Komanda:</b> /skip\n📜 <b>Nümunə:</b> <code>/skip</code>\n📚 <b>Açıqlama:</b> Sırada olan musiqiyə keçər \n\n🔮 <b>Komanda:</b> /end • /stop\n📜 <b>Nümunə:</b> /end və ya /stop\n📚 <b>Açıqlama:</b> Səsli yayımda oxunan musiqini bitirər\n\n🔮 <b>Komanda:</b> /song\n📜 <b>Nümunə:</b> /song Eşqin gəmisi\n📚 <b>Açıqlama:</b> YouTubedən axtardığınız musiqini yükləyib atar"
 help_2: "<b>Kömək menyusu üçün aşağıda olan buttona daxil olun..</b>"
 
 lang_1: "🌐 <b>Bir dil seçin:</b>"
@@ -303,5 +303,6 @@ gban_9: "» {0} tərəfindən ümumi qadağa götürüldü.\n\n{1} söhbətdən 
 gban_10: "» Heç bir istifadəçi bot tərəfindən ümumi qadağan olunmayıb."
 gban_11: "» Ümumi qadağan olunmuş istifadəçilər siyahısı yüklənir..."
 gban_12: "<b>Ümumi Qadağan Olunmuş İstifadəçilər:</b>\n\n"
+
 
 
