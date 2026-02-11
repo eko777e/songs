@@ -41,10 +41,10 @@ reload_4: "⚠️ Zəhmət olmasa gözləyin...\n\n{0} söhbətiniz üçün yeni
 reload_5: "✅ {0} söhbətiniz üçün uğurla yenidən başladıldı.\n\nYenidən başlatma cəhdi edilir..."
 
 admin_1 : "😉 Yadındadır? Yayımı yenidən başlatdın,"
-admin_2 : "⚠️ Musiqi saxladıldı : {0} 🥀"
+admin_2 : "⚠️ Musiqi saxladıldı : {0} "
 admin_3 : "💁🏻‍♀️ Yadındadır? Yayımı dayandırmısan"
-admin_4 : "⚠️ Musiqi başladıldı : {0} 🥀"
-admin_5 : "⚠️ Musiqi saxladıldı... │Etdi : {0} 🥀"
+admin_4 : "⚠️ Musiqi başladıldı : {0} "
+admin_5 : "⚠️ Musiqi saxladıldı... │Etdi : {0} "
 admin_6 : "🙋🏻‍♀️ {0} tərəfindən keçid edildi\nSırada musiqi yoxdu."
 admin_7 : "🔃 Yayım dəyişdirilərkən xəta verdi"
 admin_8 : "Zəhmət olmasa dövrü oxumanı deaktif edin\n✅ <b>Format:</b> /loop disable"
@@ -304,3 +304,4 @@ gban_9: "» {0} tərəfindən ümumi qadağa götürüldü.\n\n{1} söhbətdən 
 gban_10: "» Heç bir istifadəçi bot tərəfindən ümumi qadağan olunmayıb."
 gban_11: "» Ümumi qadağan olunmuş istifadəçilər siyahısı yüklənir..."
 gban_12: "<b>Ümumi Qadağan Olunmuş İstifadəçilər:</b>\n\n"
+
