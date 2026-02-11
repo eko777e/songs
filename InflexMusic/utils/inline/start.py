@@ -7,13 +7,13 @@ def private_panel(_):
     buttons = [
         [
             InlineKeyboardButton(
-                text=_["S_B_3"],
+                text="➕ Qrupa Əlavə Et",
                 url=f"https://t.me/{app.username}?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users",
             )
         ],
         [
-            InlineKeyboardButton(text=_["S_B_3"], url=f"https://t.me/BotAzDestek"),
-            InlineKeyboardButton(text=_["S_B_6"], url=f"https://t.me/BotAzNews")
+            InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url=f"https://t.me/BotAzDestek"),
+            InlineKeyboardButton(text="🔮 Yeniliklər", url=f"https://t.me/BotAzNews")
         ],
         
     ]
