@@ -16,7 +16,7 @@ def private_panel(_):
             InlineKeyboardButton(text="🔮 Yeniliklər", url=f"https://t.me/BotAzNews")
         ],
         [
-            InlineKeyboardButton(text="💡 Komandalar", callback_data="settings_back_helper),
+            InlineKeyboardButton(text="💡 Komandalar", callback_data="settings_back_helper"),
         ],
         
     ]
