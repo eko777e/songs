@@ -265,7 +265,7 @@ async def song_download_cb(client, CallbackQuery, _):
             caption=f"🎵 Başlıq: {title}\n\n🤖 Bot: @ByTaGiMusicBot",
             thumb=thumb_image_path,
             title=title,
-            performer="@ByTaGiMusic🇦🇿"
+            performer="ByTaGiMusic🇦🇿"
         )
         await mystic.edit_text(_["song_11"])
         await app.send_chat_action(
