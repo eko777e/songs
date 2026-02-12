@@ -17,7 +17,7 @@ async def download_song(query):
         "quiet": True,
         "skip_download": True,
         "default_search": "ytsearch1",
-        "cookiefile": "cookies.txt",  # 🔥 ƏLAVƏ OLUNDU
+        "cookiefile": "cookies/cookies.txt",  # 🔥 ƏLAVƏ OLUNDU
     }
 
     download_opts = {
@@ -27,7 +27,7 @@ async def download_song(query):
         "nocheckcertificate": True,
         "geo_bypass": True,
         "geo_bypass_country": "US",
-        "cookiefile": "cookies.txt",  # 🔥 ƏLAVƏ OLUNDU
+        "cookiefile": "cookies/cookies.txt",  # 🔥 ƏLAVƏ OLUNDU
         "http_headers": {
             "User-Agent": "Mozilla/5.0",
         },
