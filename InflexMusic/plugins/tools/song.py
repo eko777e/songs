@@ -43,7 +43,7 @@ async def song_commad_group(client, message: Message, _):
             [
                 InlineKeyboardButton(
                     text="📚 Kömək",
-                    url=f"https://t.me/{app.username}?start=song",
+                    url=f"https://t.me/ByTaGiMusicBot?start=song",
                 ),
             ]
         ]
@@ -81,6 +81,10 @@ async def song_commad_private(client, message: Message, _):
                     text="🎵 Audio",
                     callback_data=f"song_download audio|{vidid}",
                 ),
+                InlineKeyboardButton(
+                    text="🔏 Bağla",
+                    callback_data="song_close",
+                ),
             ]
         ]
         await mystic.delete()
@@ -115,6 +119,10 @@ async def song_commad_private(client, message: Message, _):
             InlineKeyboardButton(
                 text="🎵 Audio",
                 callback_data=f"song_download audio|{vidid}",
+            ),
+            InlineKeyboardButton(
+                text="🔏 Bağla",
+                callback_data="song_close",
             ),
         ]
     ]
@@ -198,6 +206,10 @@ async def song_choose_cb(client, CallbackQuery, _):
                 text="🎵 Audio",
                 callback_data=f"song_download audio|{vidid}",
             ),
+            InlineKeyboardButton(
+                text="🔏 Bağla",
+                callback_data="song_close",
+            ),
         ]
     ]
     await mystic.delete()
@@ -277,3 +289,17 @@ async def song_download_cb(client, CallbackQuery, _):
         except Exception:
             return await mystic.edit_text(_["song_10"])
         os.remove(file_path)
+
+
+# 🔏 Bağla düyməsi callback
+@app.on_callback_query(filters.regex(pattern=r"song_close") & ~BANNED_USERS)
+async def song_close_cb(client, CallbackQuery):
+    try:
+        await CallbackQuery.answer("🔏 Bağlandı")
+    except:
+        pass
+
+    try:
+        await CallbackQuery.message.delete()
+    except:
+        pass
