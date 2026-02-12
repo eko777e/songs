@@ -5,6 +5,13 @@ from pyrogram.types import (
     InlineKeyboardMarkup,
     Message,
 )
+import os
+from pyrogram import enums, filters
+from pyrogram.types import (
+    InlineKeyboardButton,
+    InlineKeyboardMarkup,
+    Message,
+)
 from config import (BANNED_USERS, SONG_DOWNLOAD_DURATION,
                     SONG_DOWNLOAD_DURATION_LIMIT)
 from InflexMusic import YouTube, app
@@ -21,7 +28,7 @@ YouTube = YouTubeAPI()
 @language
 async def song_search_results(client, message: Message, _):
     if len(message.command) < 2:
-        return await message.reply_text(_["mahni_2"])
+        return await message.reply_text(_["song_2"])
 
     query = message.text.split(None, 1)[1]
     mystic = await message.reply_text(_["mahni_1"])
@@ -32,11 +39,11 @@ async def song_search_results(client, message: Message, _):
         return await mystic.edit_text(_["mahni_3"])
 
     if str(duration_min) == "None":
-        return await mystic.edit_text(_["mahni_3"])
+        return await mystic.edit_text(_["song_3"])
 
     if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
         return await mystic.edit_text(
-            _["mahni_6"].format(SONG_DOWNLOAD_DURATION, duration_min)
+            _["play_6"].format(SONG_DOWNLOAD_DURATION, duration_min)
         )
 
     buttons = [
@@ -51,7 +58,7 @@ async def song_search_results(client, message: Message, _):
     await mystic.delete()
     return await message.reply_photo(
         thumbnail,
-        caption=_["mahni_4"].format(title),
+        caption=_["song_4"].format(title),
         reply_markup=InlineKeyboardMarkup(buttons),
     )
 
@@ -60,7 +67,7 @@ async def song_search_results(client, message: Message, _):
 @languageCB
 async def song_download_cb(client, CallbackQuery, _):
     try:
-        await CallbackQuery.answer("🎵 Yüklənir..")
+        await CallbackQuery.answer("Yüklənir..")
     except:
         pass
 
@@ -68,7 +75,7 @@ async def song_download_cb(client, CallbackQuery, _):
     callback_request = callback_data.split(None, 1)[1]
     stype, vidid = callback_request.split("|")
 
-    mystic = await CallbackQuery.edit_message_text(_["mahni_8"])
+    mystic = await CallbackQuery.edit_message_text(_["song_8"])
     yturl = f"https://www.youtube.com/watch?v={vidid}"
 
     try:
@@ -80,15 +87,15 @@ async def song_download_cb(client, CallbackQuery, _):
             title=None,
         )
     except Exception as e:
-        return await mystic.edit_text(_["mahni_9"].format(e))
+        return await mystic.edit_text(_["song_9"].format(e))
 
     if not status or not file_path:
-        return await mystic.edit_text(_["mahni_10"])
+        return await mystic.edit_text(_["song_10"])
 
     title, duration_min, duration_sec, thumbnail, vidid = await YouTube.details(yturl)
     thumb_image_path = await client.download_media(thumbnail)
 
-    await mystic.edit_text(_["mahni_11"])
+    await mystic.edit_text(_["song_11"])
     await app.send_chat_action(
         chat_id=CallbackQuery.message.chat.id,
         action=enums.ChatAction.UPLOAD_AUDIO,
@@ -98,13 +105,13 @@ async def song_download_cb(client, CallbackQuery, _):
         await app.send_audio(
             chat_id=CallbackQuery.message.chat.id,
             audio=file_path,
-            caption=f"🎵 Başlıq: {title}\n\n🤖 Bot: @ByTaGiMusicBot",
+            caption=f"🎵 Başlıq: {title}\n\n🤖 Bot: @{BOT_USERNAME}",
             thumb=thumb_image_path,
             title=title,
-            performer=f"@ByTaGiMusicBot",
+            performer=f"@{BOT_USERNAME}",
         )
         await mystic.delete()
     except Exception as e:
-        return await mystic.edit_text(_["mahni_10"] + f"\n\nError: {e}")
+        return await mystic.edit_text(_["song_10"] + f"\n\nError: {e}")
 
     os.remove(file_path)
