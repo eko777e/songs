@@ -19,8 +19,6 @@ from InflexMusic.utils.decorators.language import language, languageCB
 from InflexMusic.utils.formatters import convert_bytes
 from InflexMusic.utils.inline.song import song_markup
 
-YouTube = YouTubeAPI()
-
 
 @app.on_message(
     filters.command(["song"]) & filters.private & ~BANNED_USERS
