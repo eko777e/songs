@@ -81,7 +81,7 @@ admin_39: "1 səs silindi."
 admin_40: "Səs verildi."
 
 start_1 : "🙋🏻‍♀️ <b>ByTaGi Music🇦🇿</b> aktifdir...\n📢 Rəsmi kanal: @BotAzNews"
-start_2 : "🙋🏻‍♀️ <b>Salam</b> {0}\n🤖 <b>Mənim adım</b> {1}\n🎵 <b>Mən qruplar üçün yaradılmış səs yayım botuyam</b>\n💁🏻‍♀️ <b>Məni qrupunuza əlavə edərək musiqinin kefini çıxardın</b>\n📚 <b>Əmrlərim üçün komandlar buttonuna klikləyin</b>"
+start_2 : "🙋🏻‍♀️ <b>Salam</b> {0}\n🤖 <b>Mənim adım</b> {1}\n🎵 <b>Mən qruplar üçün yaradılmış səs yayım botuyam</b>\n💁🏻‍♀️ <b>Məni qrupunuza əlavə edərək musiqinin kefini çıxardın</b>\n📚 <b>Əmrlərim üçün komandalar buttonuna klikləyin</b>\n⚠️ <blockquote>Botun qrupunuzda işləməsi üçün, mesaj silmə və bağlantı ilə dəvət etmə yetkisini verin</blockquote>"
 start_3 : "Salam {0} 🙋🏻‍♀️ ,\nMəni Qrupa əlavə etdiyiniz üçün təşəkkürliyimi bildirirəm 😉\n<b> ByTaGi Music🇦🇿</b> daim aktif və donmasız şəkildə nəzarətinizdədir.."
 start_4 : "⚠️ Məni ilk öncə istifadə etmək üçün qrupunuz SuperGroup olmalıdı\n✅ Qrupunuzu SuperGroup edib yenidən cəhd edin\n😐 Qrupu tərk etmək məcburiyyətindəyəm..."
 start_5 : "<b>Blok edilmiş söhbət ⚠️</b>\nSizin qrup bot bazasında blok edilib, Səbəbini bilmək üçün @BotAzDestek qrupuna bildirin.."
@@ -321,6 +321,7 @@ song_8 : "🎵 <b>Musiqi yüklənilir...</b>"
 song_9 : "Youtube-DL-dən mahnı yükləmək alınmadı\n\n<b>Səbəb:</b> {0}"
 song_10 : "Teleqrama serverlərdən yüklənmə prosesi alınmadı,\n🧑🏼‍🔧 Dəstək: @BotAzDestek"
 song_11 : "✅ <b>Proses başa çatdı və göndərilir..</b>"
+
 
 
 
