@@ -1,4 +1,7 @@
 import os
+import re
+import yt_dlp
+
 from pyrogram import enums, filters
 from pyrogram.types import (
     InlineKeyboardButton,
@@ -6,35 +9,41 @@ from pyrogram.types import (
     InputMediaAudio,
     InputMediaVideo,
     Message,
+    CallbackQuery
 )
-from config import BANNED_USERS, SONG_DOWNLOAD_DURATION, SONG_DOWNLOAD_DURATION_LIMIT
-from InflexMusic import YouTube, app
-from InflexMusic.utils.decorators.language import language, languageCB
 
-# 🔎 YouTube search funksiyası (yt-dlp ilə)
-import yt_dlp
+from config import (
+    BANNED_USERS,
+    SONG_DOWNLOAD_DURATION,
+    SONG_DOWNLOAD_DURATION_LIMIT
+)
 
-async def search_youtube(query: str, limit: int = 10):
-    ydl_opts = {
-        "quiet": True,
-        "skip_download": True,
-        "extract_flat": True,
-    }
-    with yt_dlp.YoutubeDL(ydl_opts) as ydl:
-        info = ydl.extract_info(f"ytsearch{limit}:{query}", download=False)
-        results = []
-        for entry in info.get("entries", []):
-            results.append({
-                "title": entry.get("title"),
-                "id": entry.get("id"),
-                "duration": entry.get("duration"),
-                "thumbnail": entry.get("thumbnail"),
-            })
-        return results
+from SakkuMusic import YouTube, app
+from SakkuMusic.utils.decorators.language import language, languageCB
+from SakkuMusic.utils.formatters import convert_bytes
+from SakkuMusic.utils.inline.song import song_markup
 
+
+# ===============================
+# SEARCH CACHE
+# ===============================
+
+search_cache = {}
+
+def format_duration(seconds):
+    minutes = seconds // 60
+    seconds = seconds % 60
+    return f"{minutes:02}:{seconds:02}"
+
+
+# ===============================
+# GROUP COMMAND (UNCHANGED)
+# ===============================
 
 @app.on_message(
-    filters.command(["song"]) & filters.group & ~BANNED_USERS
+    filters.command(["song", "video"])
+    & filters.group
+    & ~BANNED_USERS
 )
 @language
 async def song_commad_group(client, message: Message, _):
@@ -42,8 +51,8 @@ async def song_commad_group(client, message: Message, _):
         [
             [
                 InlineKeyboardButton(
-                    text="📚 Kömək",
-                    url=f"https://t.me/ByTaGiMusicBot?start=song",
+                    text=_["SG_B_1"],
+                    url=f"https://t.me/{app.username}?start=song",
                 ),
             ]
         ]
@@ -51,255 +60,216 @@ async def song_commad_group(client, message: Message, _):
     await message.reply_text(_["song_1"], reply_markup=upl)
 
 
+# ===============================
+# PRIVATE SEARCH SYSTEM (NEW UI)
+# ===============================
+
 @app.on_message(
-    filters.command(["musiqi"]) & filters.private & ~BANNED_USERS
+    filters.command(["song"])
+    & filters.private
+    & ~BANNED_USERS
 )
-@language
-async def song_commad_private(client, message: Message, _):
-    await message.delete()
-    url = await YouTube.url(message)
-    if url:
-        if not await YouTube.exists(url):
-            return await message.reply_text(_["song_5"])
-        mystic = await message.reply_text(_["mahni_1"])
-        (
-            title,
-            duration_min,
-            duration_sec,
-            thumbnail,
-            vidid,
-        ) = await YouTube.details(url)
-        if str(duration_min) == "None":
-            return await mystic.edit_text(_["song_3"])
-        if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
-            return await mystic.edit_text(
-                _["mahni_4"].format(SONG_DOWNLOAD_DURATION, duration_min)
-            )
-        buttons = [
-            [
-                InlineKeyboardButton(
-                    text="🎵 Audio",
-                    callback_data=f"song_download audio|{vidid}",
-                ),
-                InlineKeyboardButton(
-                    text="🔏 Bağla",
-                    callback_data="song_close",
-                ),
-            ]
-        ]
-        await mystic.delete()
-        return await message.reply_photo(
-            thumbnail,
-            caption=_["song_4"].format(title),
-            reply_markup=InlineKeyboardMarkup(buttons),
-        )
-    else:
-        if len(message.command) < 2:
-            return await message.reply_text(_["song_2"])
-    mystic = await message.reply_text(_["mahni_1"])
-    query = message.text.split(None, 1)[1]
-    try:
-        (
-            title,
-            duration_min,
-            duration_sec,
-            thumbnail,
-            vidid,
-        ) = await YouTube.details(query)
-    except:
-        return await mystic.edit_text(_["mahni_3"])
-    if str(duration_min) == "None":
-        return await mystic.edit_text(_["song_3"])
-    if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
-        return await mystic.edit_text(
-            _["mahni_6"].format(SONG_DOWNLOAD_DURATION, duration_min)
-        )
-    buttons = [
-        [
-            InlineKeyboardButton(
-                text="🎵 Audio",
-                callback_data=f"song_download audio|{vidid}",
-            ),
-            InlineKeyboardButton(
-                text="🔏 Bağla",
-                callback_data="song_close",
-            ),
-        ]
-    ]
-    await mystic.delete()
-    return await message.reply_photo(
-        thumbnail,
-        caption=_["song_4"].format(title),
-        reply_markup=InlineKeyboardMarkup(buttons),
-    )
-    
-@app.on_message(
-    filters.command(["song"]) & filters.private & ~BANNED_USERS
-)
-@language
-async def song_search_results(client, message: Message, _):
+async def song_search(client, message: Message):
+
     if len(message.command) < 2:
-        return await message.reply_text(_["song_2"])
-    
+        return await message.reply_text(
+            "🎵 Zəhmət olmasa mahnı adı yazın.\n\nMisal:\n/song Tural Sedali"
+        )
+
     query = message.text.split(None, 1)[1]
-    mystic = await message.reply_text(_["mahni_1"])
-    
-    try:
-        results = await search_youtube(query, limit=10)
-    except Exception as e:
-        return await mystic.edit_text(_["mahni_3"] + f"\n\nError: {e}")
-    
+    msg = await message.reply_text("🔍 **Axtarış edilir...**")
+
+    with yt_dlp.YoutubeDL({"quiet": True}) as ytdl:
+        results = ytdl.extract_info(
+            f"ytsearch10:{query}",
+            download=False
+        )["entries"]
+
     if not results:
-        return await mystic.edit_text(_["song_5"])
-    
-    # Mətn hissəsi: 1. Musiqi adı, 2. Musiqi adı...
-    text_lines = []
-    buttons = []
-    row = []
-    for idx, result in enumerate(results, start=1):
-        text_lines.append(f"{idx}. {result['title']}")
-        row.append(
-            InlineKeyboardButton(
-                text=str(idx),
-                callback_data=f"song_choose {result['id']}"
-            )
-        )
-        # hər 5 düymədən sonra yeni sətir
-        if len(row) == 5:
-            buttons.append(row)
-            row = []
-    # qalıq düymələr varsa əlavə et
-    if row:
-        buttons.append(row)
-    
-    await mystic.delete()
-    return await message.reply_text(
-        "\n".join(text_lines),
-        reply_markup=InlineKeyboardMarkup(buttons),
-    )
+        return await msg.edit_text("❌ Heç nə tapılmadı.")
 
-@app.on_callback_query(filters.regex(pattern=r"song_choose") & ~BANNED_USERS)
-@languageCB
-async def song_choose_cb(client, CallbackQuery, _):
-    try:
-        await CallbackQuery.answer("✅ Seçildi...")
-    except:
-        pass
-    
-    vidid = CallbackQuery.data.split(None, 1)[1]
-    yturl = f"https://www.youtube.com/watch?v={vidid}"
-    
-    mystic = await CallbackQuery.edit_message_text(_["mahni_1"])
-    try:
-        title, duration_min, duration_sec, thumbnail, vidid = await YouTube.details(yturl)
-    except:
-        return await mystic.edit_text(_["mahni_3"])
-    
-    if int(duration_sec) > SONG_DOWNLOAD_DURATION_LIMIT:
-        return await mystic.edit_text(
-            _["mahni_6"].format(SONG_DOWNLOAD_DURATION, duration_min)
-        )
-    
-    buttons = [
+    search_cache[message.from_user.id] = {
+        "results": results,
+        "index": 0,
+        "reporting": False
+    }
+
+    await send_result(msg, message.from_user.id)
+
+
+# ===============================
+# RESULT DISPLAY
+# ===============================
+
+async def send_result(msg, user_id):
+
+    data = search_cache[user_id]
+    result = data["results"][data["index"]]
+
+    title = result["title"]
+    views = result.get("view_count", 0)
+    channel = result.get("uploader", "Unknown")
+    thumb = result["thumbnail"]
+
+    buttons = InlineKeyboardMarkup([
         [
-            InlineKeyboardButton(
-                text="🎵 Audio",
-                callback_data=f"song_download audio|{vidid}",
-            ),
-            InlineKeyboardButton(
-                text="🔏 Bağla",
-                callback_data="song_close",
-            ),
+            InlineKeyboardButton("⬅️ Geri", callback_data="prev"),
+            InlineKeyboardButton("✅ Yüklə", callback_data="download"),
+            InlineKeyboardButton("➡️ İrəli", callback_data="next"),
+        ],
+        [
+            InlineKeyboardButton("🔍 Məlumat", callback_data="info"),
+            InlineKeyboardButton("⚠️ Report", callback_data="report"),
+        ],
+        [
+            InlineKeyboardButton("❌ Bağla", callback_data="close")
         ]
-    ]
-    await mystic.delete()
-    return await CallbackQuery.message.reply_photo(
-        thumbnail,
-        caption=_["song_4"].format(title),
-        reply_markup=InlineKeyboardMarkup(buttons),
+    ])
+
+    caption = f"""
+**Axtarış nəticələri:**
+
+🎵 Adı: {title}
+👁️ Baxış: {views}
+📢 Yayım: {channel}
+"""
+
+    await msg.delete()
+    await msg.reply_photo(
+        thumb,
+        caption=caption,
+        reply_markup=buttons
     )
 
 
-@app.on_callback_query(filters.regex(pattern=r"song_download") & ~BANNED_USERS)
-@languageCB
-async def song_download_cb(client, CallbackQuery, _):
-    try:
-        await CallbackQuery.answer("🎵 Yüklənir..")
-    except:
-        pass
+# ===============================
+# CALLBACK SYSTEM
+# ===============================
 
-    callback_data = CallbackQuery.data.strip()
-    callback_request = callback_data.split(None, 1)[1]
-    stype, vidid = callback_request.split("|")
-    mystic = await CallbackQuery.edit_message_text(_["song_8"])
-    yturl = f"https://www.youtube.com/watch?v={vidid}"
+@app.on_callback_query(~BANNED_USERS)
+async def song_ui_callbacks(client, query: CallbackQuery):
 
-    try:
-        file_path, status = await YouTube.download(
-            yturl,
-            mystic,
-            songaudio=True if stype == "audio" else None,
-            songvideo=True if stype == "video" else None,
-            title=None,
+    user_id = query.from_user.id
+
+    if user_id not in search_cache:
+        return await query.answer("Sessiya bitib.", show_alert=True)
+
+    data = search_cache[user_id]
+    results = data["results"]
+
+    # NEXT
+    if query.data == "next":
+        if data["index"] < len(results) - 1:
+            data["index"] += 1
+        await query.message.delete()
+        await send_result(query.message, user_id)
+
+    # PREV
+    elif query.data == "prev":
+        if data["index"] > 0:
+            data["index"] -= 1
+        await query.message.delete()
+        await send_result(query.message, user_id)
+
+    # CLOSE
+    elif query.data == "close":
+        await query.message.delete()
+
+    # DOWNLOAD
+    elif query.data == "download":
+
+        result = results[data["index"]]
+        yturl = result["webpage_url"]
+
+        await query.message.edit_caption("⬇️ **Yüklənir...**")
+
+        ydl_opts = {
+            "format": "bestaudio",
+            "outtmpl": "%(title)s.%(ext)s",
+            "quiet": True
+        }
+
+        with yt_dlp.YoutubeDL(ydl_opts) as ytdl:
+            info = ytdl.extract_info(yturl, download=True)
+            filename = ytdl.prepare_filename(info)
+
+        caption = f"""
+🎵 **Başlıq:** {info['title']}
+⏰ **Müddət:** {format_duration(info['duration'])}
+
+📢: @ByTaGiMusicBot
+"""
+
+        await client.send_audio(
+            chat_id=query.message.chat.id,
+            audio=filename,
+            caption=caption,
+            performer="ByTaGiMusic 🇦🇿",
+            title=info['title']
         )
-    except Exception as e:
-        return await mystic.edit_text(_["song_9"].format(e))
 
-    if not status or not file_path:
-        return await mystic.edit_text(_["song_10"])
+        os.remove(filename)
 
-    title, duration_min, duration_sec, thumbnail, vidid = await YouTube.details(yturl)
-    thumb_image_path = await CallbackQuery.message.download()
-    duration = duration_sec
+    # INFO PAGE
+    elif query.data == "info":
 
-    if stype == "video":
-        med = InputMediaVideo(
-            media=file_path,
-            duration=duration,
-            thumb=thumb_image_path,
-            caption=title,
-            supports_streaming=True,
+        result = results[data["index"]]
+
+        caption = f"""
+🎵 **Başlıq:** {result['title']}
+⏰ **Müddət:** {format_duration(result['duration'])}
+👁️ **Baxış sayı:** {result.get('view_count',0)}
+📤 **Kanal:** {result.get('uploader','Unknown')}
+🗓️ **Tarix:** {result.get('upload_date','Unknown')}
+
+📢: @ByTaGiMusicBot
+"""
+
+        back = InlineKeyboardMarkup([
+            [InlineKeyboardButton("⬅️ Geri", callback_data="back_main")]
+        ])
+
+        await query.message.edit_caption(
+            caption,
+            reply_markup=back
         )
-        await mystic.edit_text(_["song_11"])
-        await app.send_chat_action(
-            chat_id=CallbackQuery.message.chat.id,
-            action=enums.ChatAction.UPLOAD_VIDEO,
+
+    # BACK
+    elif query.data == "back_main":
+        await query.message.delete()
+        await send_result(query.message, user_id)
+
+    # REPORT
+    elif query.data == "report":
+
+        back = InlineKeyboardMarkup([
+            [InlineKeyboardButton("⬅️ Geri", callback_data="back_main")]
+        ])
+
+        await query.message.edit_caption(
+            "⚠️ **Musiqinin nə kimi xətası var?**",
+            reply_markup=back
         )
-        try:
-            await CallbackQuery.edit_message_media(media=med)
-        except Exception:
-            return await mystic.edit_text(_["song_10"])
-        os.remove(file_path)
 
-    elif stype == "audio":
-        med = InputMediaAudio(
-            media=file_path,
-            caption=f"🎵 Başlıq: {title}\n\n🤖 Bot: @ByTaGiMusicBot",
-            thumb=thumb_image_path,
-            title=title,
-            performer="ByTaGiMusic🇦🇿"
+        search_cache[user_id]["reporting"] = True
+
+    await query.answer()
+
+
+# ===============================
+# REPORT RECEIVE
+# ===============================
+
+@app.on_message(filters.private & ~filters.command(["song"]))
+async def report_receiver(client, message: Message):
+
+    user_id = message.from_user.id
+
+    if user_id in search_cache and search_cache[user_id].get("reporting"):
+
+        await message.reply_text(
+            "**Mesajınız təsdiq edildi** ✅\n"
+            "**Admin tərəfindən xətaya baxılacaq**"
         )
-        await mystic.edit_text(_["song_11"])
-        await app.send_chat_action(
-            chat_id=CallbackQuery.message.chat.id,
-            action=enums.ChatAction.UPLOAD_AUDIO,
-        )
-        try:
-            await CallbackQuery.edit_message_media(media=med)
-        except Exception:
-            return await mystic.edit_text(_["song_10"])
-        os.remove(file_path)
 
-
-# 🔏 Bağla düyməsi callback
-@app.on_callback_query(filters.regex(pattern=r"song_close") & ~BANNED_USERS)
-async def song_close_cb(client, CallbackQuery):
-    try:
-        await CallbackQuery.answer("🔏 Bağlandı")
-    except:
-        pass
-
-    try:
-        await CallbackQuery.message.delete()
-    except:
-        pass
+        search_cache[user_id]["reporting"] = False
