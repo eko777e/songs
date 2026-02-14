@@ -274,7 +274,7 @@ async def song_download_cb(client, CallbackQuery, _):
     elif stype == "audio":
         med = InputMediaAudio(
             media=file_path,
-            caption=f"🎵 Başlıq: {title}\n\n🤖 Bot: @ByTaGiMusicBot",
+            caption=f"🎵 Başlıq: {title}\n\n📢: @ByTaGiMusicBot",
             thumb=thumb_image_path,
             title=title,
             performer="ByTaGiMusic🇦🇿"
