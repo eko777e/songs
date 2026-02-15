@@ -271,7 +271,7 @@ async def song_download_cb(client, CallbackQuery, _):
                 chat_id=CallbackQuery.message.chat.id,
                 video=file_path,
                 duration=int(duration_sec),
-                caption=f"🎥 **Başlıq:** {title}\n\n📢: @ByTaGiMusicBot",
+                caption=f"🎥 <b>Başlıq:</b> {title}\n\n📢: @ByTaGiMusicBot",
             )
             await mystic.delete() # "Göndərilir" yazısını silirik
         except Exception:
@@ -290,7 +290,7 @@ async def song_download_cb(client, CallbackQuery, _):
             await client.send_audio(
                 chat_id=CallbackQuery.message.chat.id,
                 audio=file_path,
-                caption=f"🎵 <b>Mahnı:</b> {title}\n<b>Link: {link}\n\n📢: @ByTaGiMusicBot",
+                caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @ByTaGiMusicBot",
                 title=title,
                 performer="ByTaGiMusic🇦🇿",
                 duration=int(duration_sec)
