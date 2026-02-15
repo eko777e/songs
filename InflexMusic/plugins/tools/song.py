@@ -219,6 +219,7 @@ async def song_choose_cb(client, CallbackQuery, _):
         reply_markup=InlineKeyboardMarkup(buttons),
     )
 
+
 @app.on_callback_query(filters.regex(pattern=r"song_download") & ~BANNED_USERS)
 @languageCB
 async def song_download_cb(client, CallbackQuery, _):
@@ -230,7 +231,6 @@ async def song_download_cb(client, CallbackQuery, _):
     callback_data = CallbackQuery.data.strip()
     callback_request = callback_data.split(None, 1)[1]
     stype, vidid = callback_request.split("|")
-
     mystic = await CallbackQuery.edit_message_text(_["song_8"])
     yturl = f"https://www.youtube.com/watch?v={vidid}"
 
@@ -249,47 +249,45 @@ async def song_download_cb(client, CallbackQuery, _):
         return await mystic.edit_text(_["song_10"])
 
     title, duration_min, duration_sec, thumbnail, vidid = await YouTube.details(yturl)
+    thumb_image_path = await CallbackQuery.message.download()
     duration = duration_sec
 
-    await mystic.delete()
-
-    if stype == "audio":
-        await app.send_chat_action(
-            chat_id=CallbackQuery.message.chat.id,
-            action=enums.ChatAction.UPLOAD_AUDIO,
+    if stype == "video":
+        med = InputMediaVideo(
+            media=file_path,
+            duration=duration,
+            thumb=thumb_image_path,
+            caption=title,
+            supports_streaming=True,
         )
-
-        try:
-            await CallbackQuery.message.reply_audio(
-                audio=file_path,
-                caption=f"🎵 Başlıq: {title}\n\n📢: @ByTaGiMusicBot",
-                duration=duration,
-                title=title,
-                performer="ByTaGiMusic🇦🇿",
-                file_name=f"{title}.mp3"  # 🔥 Telefona düzgün ad ilə düşməsi üçün
-            )
-        except Exception as e:
-            return await CallbackQuery.message.reply_text(_["song_10"])
-
-        os.remove(file_path)
-
-    elif stype == "video":
+        await mystic.edit_text(_["song_11"])
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=enums.ChatAction.UPLOAD_VIDEO,
         )
-
         try:
-            await CallbackQuery.message.reply_video(
-                video=file_path,
-                caption=title,
-                duration=duration,
-                supports_streaming=True,
-                file_name=f"{title}.mp4"
-            )
+            await CallbackQuery.edit_message_media(media=med)
         except Exception:
-            return await CallbackQuery.message.reply_text(_["song_10"])
+            return await mystic.edit_text(_["song_10"])
+        os.remove(file_path)
 
+    elif stype == "audio":
+        med = InputMediaAudio(
+            media=file_path,
+            caption=f"🎵 Başlıq: {title}\n\n📢: @ByTaGiMusicBot",
+            thumb=thumb_image_path,
+            title=title,
+            performer="ByTaGiMusic🇦🇿"
+        )
+        await mystic.edit_text(_["song_11"])
+        await app.send_chat_action(
+            chat_id=CallbackQuery.message.chat.id,
+            action=enums.ChatAction.UPLOAD_AUDIO,
+        )
+        try:
+            await CallbackQuery.edit_message_media(media=med)
+        except Exception:
+            return await mystic.edit_text(_["song_10"])
         os.remove(file_path)
 
 
