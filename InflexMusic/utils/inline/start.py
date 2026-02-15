@@ -3,6 +3,19 @@ from pyrogram.types import InlineKeyboardButton
 import config
 from InflexMusic import app
 
+def start_panel(_):
+    buttons = [
+        [
+            InlineKeyboardButton(
+                text="💻 Coded By", url=f"https://t.me/BotAzNews"
+            ),
+            InlineKeyboardButton(text="💡 Komandalar", callback_data="settings_back_helper"),
+        ],
+    ]
+    return buttons
+
+
+
 def private_panel(_):
     buttons = [
         [
