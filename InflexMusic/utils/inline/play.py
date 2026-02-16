@@ -29,10 +29,13 @@ def track_markup(_, videoid, user_id, channel, fplay):
 
 
 def stream_markup_timer(_, chat_id, played, dur):
+def stream_markup_timer(_, chat_id, played, dur):
     played_sec = time_to_seconds(played)
     duration_sec = time_to_seconds(dur)
     percentage = (played_sec / duration_sec) * 100
     umm = math.floor(percentage)
+
+    # Progress bar hissəsi eyni qalır...
     if 0 < umm <= 10:
         bar = "-◈─────────"
     elif 10 < umm < 20:
@@ -53,6 +56,10 @@ def stream_markup_timer(_, chat_id, played, dur):
         bar = "----------◈─"
     else:
         bar = "--------------✕"
+
+    # Dinamik link
+    listen_url = f"https://t.me/ByTaGiMusicBot/join?startapp=group_{chat_id}"
+
     buttons = [
         [
             InlineKeyboardButton(
@@ -61,11 +68,17 @@ def stream_markup_timer(_, chat_id, played, dur):
             )
         ],
         [
-            InlineKeyboardButton(text="💻 Coded By", url=f"https://t.me/RashadRC")
+            InlineKeyboardButton(
+                text="🎧 Dinlə",
+                url=listen_url
+            )
         ],
         [
-            InlineKeyboardButton(text="🔮 Yeniliklər", url=f"https://t.me/BotAzNews"),   
-            InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url=f"https://t.me/BotAzDestek")
+            InlineKeyboardButton(text="💻 Coded By", url="https://t.me/RashadRC")
+        ],
+        [
+            InlineKeyboardButton(text="🔮 Yeniliklər", url="https://t.me/BotAzNews"),   
+            InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url="https://t.me/BotAzDestek")
         ],
         [
             InlineKeyboardButton(text="❌ Bağla", callback_data="close")
