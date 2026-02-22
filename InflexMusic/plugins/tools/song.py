@@ -263,6 +263,9 @@ async def song_download_cb(client, CallbackQuery, _):
     playlist_button = InlineKeyboardMarkup(
         [[InlineKeyboardButton(text="🎧 Playlist", url="https://t.me/UzeyirPlaylist")]]
     )
+    playlist1_button = InlineKeyboardMarkup(
+        [[InlineKeyboardButton(text="✚ Məni Qrupa Əlavə Et ✚", url="https://t.me/UzeyirMusic_Bot?startgroup=true")]]
+        )
 
     if stype == "video":
         await mystic.edit_text(_["song_11"])  # "Göndərilir..." yazısı
@@ -295,7 +298,7 @@ async def song_download_cb(client, CallbackQuery, _):
             await client.send_audio(
                 chat_id=CallbackQuery.message.chat.id,
                 audio=file_path,
-                caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @UzeyirMusic_Bot",
+                caption=f"🎵 <b>Adı:</b> {title}\n\n🤖 <b>Yüklədi:</b> @UzeyirMusic_Bot",
                 title=title,
                 performer="UzeyirMusic🇦🇿",
                 duration=int(duration_sec),
@@ -306,12 +309,13 @@ async def song_download_cb(client, CallbackQuery, _):
             await client.send_audio(
                 chat_id=PLAYLIST_USERNAME,
                 audio=file_path,
-                caption=f"🎵 <b>Mahnı:</b> {title}\n"
-                        f"🙋🏻 <b>İstəyən:</b> {CallbackQuery.from_user.mention}\n\n"
-                        f"📢: @UzeyirMusic_Bot",
+                caption=f"🎵 <b>Adı:</b> {title}\n"
+                        f"👤 <b>İstəyən:</b> {CallbackQuery.from_user.mention}\n\n"
+                        f"🤖 <b>Yüklədi:</b> @UzeyirMusic_Bot",
                 title=title,
                 performer="UzeyirMusic🇦🇿",
                 duration=int(duration_sec)
+                reply_markup=playlist1_button
             )
 
             await mystic.delete()
