@@ -314,7 +314,7 @@ async def song_download_cb(client, CallbackQuery, _):
                         f"🤖 <b>Yüklədi:</b> @UzeyirMusic_Bot",
                 title=title,
                 performer="UzeyirMusic🇦🇿",
-                duration=int(duration_sec)
+                duration=int(duration_sec),
                 reply_markup=playlist1_button
             )
 
