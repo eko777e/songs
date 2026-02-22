@@ -80,14 +80,14 @@ admin_38: "1 səs əlavə edildi."
 admin_39: "1 səs silindi."
 admin_40: "Səs verildi."
 
-start_1 : "🙋🏻‍♀️ <b>ByTaGi Music🇦🇿</b> aktifdir...\n📢 Rəsmi kanal: @BotAzNews\n<blockquote>💻 Bot Rəsmi olaraq hər gün nəzarət altındadır və ən güclü server üzərindən istifadə edilir, Donma və ya hər hansısa bir problem olduğu zaman bizimlə əlaqə saxlamağı unutmayın</blockquote>"
-start_2 : "🙋🏻‍♀️ <b>Salam</b> {0}\n🤖 <b>Mənim adım</b> {1}\n🎵 <b>Mən qruplar üçün yaradılmış səs yayım botuyam</b>\n💁🏻‍♀️ <b>Məni qrupunuza əlavə edərək musiqinin kefini çıxardın</b>\n📚 <b>Əmrlərim üçün komandalar buttonuna klikləyin</b>\n<blockquote>⚠️ Botun qrupunuzda işləməsi üçün, <b>mesaj silmə və bağlantı ilə dəvət etmə</b> yetkisini verin</blockquote>"
-start_3 : "Salam {0} 🙋🏻‍♀️ ,\nMəni Qrupa əlavə etdiyiniz üçün təşəkkürliyimi bildirirəm 😉\n<b> ByTaGi Music🇦🇿</b> daim aktif və donmasız şəkildə nəzarətinizdədir.."
+start_1 : "🙋🏻‍♀️ <b>Music Yükləmə botu🇦🇿</b> aktifdir...\n📢 Rəsmi kanal: @BotAzNews\n<blockquote>💻 Bot Rəsmi olaraq hər gün nəzarət altındadır və ən güclü server üzərindən istifadə edilir, Donma və ya hər hansısa bir problem olduğu zaman bizimlə əlaqə saxlamağı unutmayın</blockquote>"
+start_2 : "🙋🏻‍♀️ <b>Salam</b> {0}\n🤖 <b>Mənim adım</b> {1}\n🎧 <b>Mən musiqi yükləmək funksiyasına malikəm</b>\n🌟 <b>Daha Ətraflı məlumat üçün 💡 Komandalar buttonuna toxun</b>"
+start_3 : "Salam {0} 🙋🏻‍♀️ ,\nMəni Qrupa əlavə etdiyiniz üçün təşəkkürliyimi bildirirəm 😉\n<b>Music Yükləmə botu 🇦🇿</b> daim aktif və donmasız şəkildə nəzarətinizdədir.."
 start_4 : "⚠️ Məni ilk öncə istifadə etmək üçün qrupunuz SuperGroup olmalıdı\n✅ Qrupunuzu SuperGroup edib yenidən cəhd edin\n😐 Qrupu tərk etmək məcburiyyətindəyəm..."
 start_5 : "<b>Blok edilmiş söhbət ⚠️</b>\nSizin qrup bot bazasında blok edilib, Səbəbini bilmək üçün @BotAzDestek qrupuna bildirin.."
 start_6 : "🎧 <b>Mahnı infosu</b>\n\n🎵 <b>Başlıq :</b> {0}\n\n⏰ <b>Müddət :</b> {1}\n👀 <b>Baxış :</b> <code>{2}</code>\n🔃 <b>Yayımlanma tarixi :</b> {3}\n📢 <b>Kanal :</b> <a href={4}>{5}</a>\n"
 
-help_1: "<b>ByTaGi Music 🇦🇿</b> üçün komandalar:\n\n🔮 <b>Komanda:</b> /play\n📜 <b>Nümunə:</b> <code>/play Eşqin Gəmisi</code>\n📚 <b>Açıqlama:</b> Səsli axın üçün musiqi oxudar\n\n🔮 <b>Komanda:</b> /skip\n📜 <b>Nümunə:</b> <code>/skip</code>\n📚 <b>Açıqlama:</b> Sırada olan musiqiyə keçər \n\n🔮 <b>Komanda:</b> /end • /stop\n📜 <b>Nümunə:</b> <code>/end</code> və ya <code>/stop</code>\n📚 <b>Açıqlama:</b> Səsli yayımda oxunan musiqini bitirər\n\n🔮 <b>Komanda:</b> /song\n📜 <b>Nümunə:</b> <code>/song Eşqin gəmisi</code>\n📚 <b>Açıqlama:</b> YouTubedən axtardığınız musiqini yükləyib atar"
+help_1: "<b>Music Yükləmək🇦🇿</b> üçün komandalar:\n\n🔮 <b>Komanda:</b> /song\n📜 <b>Nümunə:</b> <code>/song Üzeyir Qara gözlər</code>\n📚 <b> Açıqlama:</b>Yazdığınız musiqini yükləyər\n\nƏlavə funksiyalar bir müddət sonra təyin ediləcək.."
 help_2: "<b>Kömək menyusu üçün aşağıda olan buttona daxil olun..</b>"
 
 lang_1: "🌐 <b>Bir dil seçin:</b>"
@@ -322,3 +322,4 @@ song_8 : "🎵 <b>Musiqi yüklənilir...</b>"
 song_9 : "Youtube-DL-dən mahnı yükləmək alınmadı\n\n<b>Səbəb:</b> {0}"
 song_10 : "❌ <b>Telegrama serverlərdən yüklənmə prosesi alınmadı,</b>\n🧑🏼‍🔧 Dəstək: @BotAzDestek"
 song_11 : "✅ <b>Proses başa çatdı və göndərilir..</b>"
+
