@@ -26,7 +26,7 @@ SONG_DOWNLOAD_DURATION = int(
 LOG_GROUP_ID = int(getenv("LOG_GROUP_ID", "-1003539228383"))
 
 # Get this value from @MissRose_Bot on Telegram by /id
-OWNER_ID = getenv("OWNER_ID")
+OWNER_ID = int(getenv("OWNER_ID", "7978943627"))
 
 # Fill Queue Limit . Example - 15
 QUEUE_LIMIT = int(getenv("QUEUE_LIMIT", "10"))
@@ -143,6 +143,7 @@ if SUPPORT_GROUP:
 SONG_DOWNLOAD_DURATION_LIMIT = int(
     time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00")
 )
+
 
 
 
