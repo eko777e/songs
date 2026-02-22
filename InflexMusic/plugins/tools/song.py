@@ -231,14 +231,14 @@ async def song_download_cb(client, CallbackQuery, _):
     # "song_download audio|vidid" formatında gəlir
     callback_request = callback_data.split(None, 1)[1]
     stype, vidid = callback_request.split("|")
-    
+
     # Şəkilli mesajı silirik və yerinə yalnız yazı olan mesaj göndəririk
     await CallbackQuery.message.delete()
     mystic = await client.send_message(
         chat_id=CallbackQuery.message.chat.id, 
-        text=_["song_8"] # Yüklənir yazısı
+        text=_["song_8"]  # "Yüklənir..." yazısı
     )
-    
+
     yturl = f"https://www.youtube.com/watch?v={vidid}"
 
     try:
@@ -257,11 +257,12 @@ async def song_download_cb(client, CallbackQuery, _):
 
     # Metadan başlıq və müddəti alırıq
     title, duration_min, duration_sec, thumbnail, vidid = await YouTube.details(yturl)
-    
-    # Şəkil yükləmə hissəsini sildik (thumb_image_path artıq yoxdur)
-    
+
+    # Playlist kanalı
+    PLAYLIST_USERNAME = "@UzeyirPlaylist"
+
     if stype == "video":
-        await mystic.edit_text(_["song_11"]) # Göndərilir yazısı
+        await mystic.edit_text(_["song_11"])  # Göndərilir yazısı
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=enums.ChatAction.UPLOAD_VIDEO,
@@ -273,50 +274,46 @@ async def song_download_cb(client, CallbackQuery, _):
                 duration=int(duration_sec),
                 caption=f"🎥 <b>Başlıq:</b> {title}\n\n📢: @ByTaGiMusicBot",
             )
-            await mystic.delete() # "Göndərilir" yazısını silirik
+            await mystic.delete()  # "Göndərilir" yazısını silirik
         except Exception:
             return await mystic.edit_text(_["song_10"])
-        
         if os.path.exists(file_path):
             os.remove(file_path)
-            
-    PLAYLIST_USERNAME = "@UzeyirPlaylist"  # Playlist kanalının username-i
 
-elif stype == "audio":
-    await mystic.edit_text(["song_11"])  # Göndərilir yazısı
-    await app.send_chat_action(
-        chat_id=CallbackQuery.message.chat.id,
-        action=enums.ChatAction.UPLOAD_AUDIO,
-    )
-    try:
-        # 1️⃣ İstifadəçiyə göndəririk
-        await client.send_audio(
+    elif stype == "audio":
+        await mystic.edit_text(_["song_11"])  # Göndərilir yazısı
+        await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
-            audio=file_path,
-            caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @UzeyirMusic_Bot",
-            title=title,
-            performer="UzeyirMusic🇦🇿",
-            duration=int(duration_sec)
+            action=enums.ChatAction.UPLOAD_AUDIO,
         )
+        try:
+            # İstifadəçiyə göndəririk
+            await client.send_audio(
+                chat_id=CallbackQuery.message.chat.id,
+                audio=file_path,
+                caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @UzeyirMusic_Bot",
+                title=title,
+                performer="UzeyirMusic🇦🇿",
+                duration=int(duration_sec)
+            )
 
-        # 2️⃣ Playlist kanalına göndəririk
-        await client.send_audio(
-            chat_id=PLAYLIST_USERNAME,
-            audio=file_path,
-            caption=f"🎵 <b>Mahnı:</b> {title}\n"
-                    f"🙋🏻 <b>İstəyən:</b> {CallbackQuery.from_user.mention}\n\n"
-                    f"📢: @UzeyirMusic_Bot",
-            title=title,
-            performer="UzeyirMusic🇦🇿",
-            duration=int(duration_sec)
-        )
+            # Playlist kanalına göndəririk
+            await client.send_audio(
+                chat_id=PLAYLIST_USERNAME,
+                audio=file_path,
+                caption=f"🎵 <b>Mahnı:</b> {title}\n"
+                        f"🙋🏻 <b>İstəyən:</b> {CallbackQuery.from_user.mention}\n\n"
+                        f"📢: @UzeyirMusic_Bot",
+                title=title,
+                performer="UzeyirMusic🇦🇿",
+                duration=int(duration_sec)
+            )
 
-        await mystic.delete()  # "Göndərilir" yazısını silirik
-    except Exception:
-        return await mystic.edit_text(["song_10"])
-
-    if os.path.exists(file_path):    
-        os.remove(file_path)
+            await mystic.delete()  # "Göndərilir" yazısını silirik
+        except Exception:
+            return await mystic.edit_text(_["song_10"])
+        if os.path.exists(file_path):
+            os.remove(file_path)
 
 
 # 🔏 Bağla düyməsi callback
