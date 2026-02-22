@@ -7,7 +7,7 @@ def start_panel(_):
     buttons = [
         [
             InlineKeyboardButton(
-                text="💻 Coded By", url=f"https://t.me/RashadRc"
+                text="💻 Coded By", url=f"https://t.me/Uzeyirrrrrrrrrr"
             ),
         ],
     ]
@@ -22,7 +22,7 @@ def private_panel(_):
                 text="➕ Qrupa Əlavə Et",
                 url=f"https://t.me/{app.username}?startgroup=s&admin=delete_messages+manage_video_chats+pin_messages+invite_users",
             ),
-            InlineKeyboardButton(text="💻 Coded by", url=f"https://t.me/RashadRC")
+            InlineKeyboardButton(text="💻 Coded by", url=f"https://t.me/Uzeyirrrrrrrrrr")
         ],
         [
             InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url=f"https://t.me/BotAzDestek"),
