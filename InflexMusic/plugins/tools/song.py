@@ -281,26 +281,43 @@ async def song_download_cb(client, CallbackQuery, _):
             os.remove(file_path)
 
     elif stype == "audio":
-        await mystic.edit_text(_["song_11"]) # Göndərilir yazısı
-        await app.send_chat_action(
+    PLAYLIST_USERNAME = "@UzeyirPlaylist"  # Playlist kanalının username-i
+
+elif stype == "audio":
+    await mystic.edit_text(["song_11"])  # Göndərilir yazısı
+    await app.send_chat_action(
+        chat_id=CallbackQuery.message.chat.id,
+        action=enums.ChatAction.UPLOAD_AUDIO,
+    )
+    try:
+        # 1️⃣ İstifadəçiyə göndəririk
+        await client.send_audio(
             chat_id=CallbackQuery.message.chat.id,
-            action=enums.ChatAction.UPLOAD_AUDIO,
+            audio=file_path,
+            caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @UzeyirMusic_Bot",
+            title=title,
+            performer="UzeyirMusic🇦🇿",
+            duration=int(duration_sec)
         )
-        try:
-            await client.send_audio(
-                chat_id=CallbackQuery.message.chat.id,
-                audio=file_path,
-                caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @ByTaGiMusicBot",
-                title=title,
-                performer="ByTaGiMusic🇦🇿",
-                duration=int(duration_sec)
-            )
-            await mystic.delete() # "Göndərilir" yazısını silirik
-        except Exception:
-            return await mystic.edit_text(_["song_10"])
-        
-        if os.path.exists(file_path):
-            os.remove(file_path)
+
+        # 2️⃣ Playlist kanalına göndəririk
+        await client.send_audio(
+            chat_id=PLAYLIST_USERNAME,
+            audio=file_path,
+            caption=f"🎵 <b>Mahnı:</b> {title}\n"
+                    f"🙋🏻 <b>İstəyən:</b> {CallbackQuery.from_user.mention}\n\n"
+                    f"📢: @UzeyirMusic_Bot",
+            title=title,
+            performer="UzeyirMusic🇦🇿",
+            duration=int(duration_sec)
+        )
+
+        await mystic.delete()  # "Göndərilir" yazısını silirik
+    except Exception:
+        return await mystic.edit_text(["song_10"])
+
+    if os.path.exists(file_path):    
+        os.remove(file_path)
 
 
 # 🔏 Bağla düyməsi callback
