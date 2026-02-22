@@ -9,13 +9,13 @@ load_dotenv()
 
 # Get this value from my.telegram.org/apps
 API_ID = int(getenv("API_ID", "24168862"))
-API_HASH = getenv("API_HASH", "916a9424dd1e58ab7955001ccc0172b3"))
+API_HASH = getenv("API_HASH", "916a9424dd1e58ab7955001ccc0172b3")
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN", "8465309717:AAERLZfaxGPegJB6ADl44J0rtDzyszMFR-4"))
+BOT_TOKEN = getenv("BOT_TOKEN", "8465309717:AAERLZfaxGPegJB6ADl44J0rtDzyszMFR-4")
 
 # Get your mongo url from cloud.mongodb.com
-MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://agautevdragitevsvh:pJSptT6jE0pcw9a4@cluster0.de4uc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0"))
+MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://agautevdragitevsvh:pJSptT6jE0pcw9a4@cluster0.de4uc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
 
 DURATION_LIMIT_MIN = int(getenv("DURATION_LIMIT", 60))
 
@@ -74,7 +74,7 @@ TG_VIDEO_FILESIZE_LIMIT = int(getenv("TG_VIDEO_FILESIZE_LIMIT", 1073741824))
 
 
 # Get your pyrogram v2 session from Replit
-STRING1 = getenv("STRING_SESSION", "AgFwyZ4AZqPgyjncSzFpHjpMtezGGSyS55Ii2-uWW6YZ1HCEa068WwMpxaI0aMmwybDdS1EMGW2v7A03t2M6OjNf8cJntN6ym28zeq_Gu_XeQLYDTt31yKD6I4pfMP8gevp652EPdW8gZ-JZA2EibhX6ykM653psqpg-CK6g6VMO-Jgtx4KAFSSPsuD1RlgTdnDcxN8xzWa62-W4yMi8xF_B0dNcsOIB9QHGKsmdiBtW6WYg6zd3KyfQlwKSpVghMWhGUOwFA3WKTPOlT2zz50GQoTBMM4d7vZSDeS1ij2Zj0nqGZSLgpURjucAggpOb-mw3kgreX9e06W0BfrpsHkYhqn_-kwAAAAHqMRppAA"))
+STRING1 = getenv("STRING_SESSION", "AgFwyZ4AZqPgyjncSzFpHjpMtezGGSyS55Ii2-uWW6YZ1HCEa068WwMpxaI0aMmwybDdS1EMGW2v7A03t2M6OjNf8cJntN6ym28zeq_Gu_XeQLYDTt31yKD6I4pfMP8gevp652EPdW8gZ-JZA2EibhX6ykM653psqpg-CK6g6VMO-Jgtx4KAFSSPsuD1RlgTdnDcxN8xzWa62-W4yMi8xF_B0dNcsOIB9QHGKsmdiBtW6WYg6zd3KyfQlwKSpVghMWhGUOwFA3WKTPOlT2zz50GQoTBMM4d7vZSDeS1ij2Zj0nqGZSLgpURjucAggpOb-mw3kgreX9e06W0BfrpsHkYhqn_-kwAAAAHqMRppAA")
 STRING2 = getenv("STRING_SESSION2", None)
 STRING3 = getenv("STRING_SESSION3", None)
 STRING4 = getenv("STRING_SESSION4", None)
@@ -145,5 +145,6 @@ if SUPPORT_GROUP:
 SONG_DOWNLOAD_DURATION_LIMIT = int(
     time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00")
 )
+
 
 
