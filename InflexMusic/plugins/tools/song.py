@@ -279,8 +279,7 @@ async def song_download_cb(client, CallbackQuery, _):
         
         if os.path.exists(file_path):
             os.remove(file_path)
-
-    elif stype == "audio":
+            
     PLAYLIST_USERNAME = "@UzeyirPlaylist"  # Playlist kanalının username-i
 
 elif stype == "audio":
