@@ -25,8 +25,8 @@ def private_panel(_):
             InlineKeyboardButton(text="💻 Coded by", url=f"https://t.me/Uzeyirrrrrrrrrr")
         ],
         [
-            InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url=f"https://t.me/BotAzDestek"),
-            InlineKeyboardButton(text="🔮 Yeniliklər", url=f"https://t.me/BotAzNews")
+            InlineKeyboardButton(text="🧑🏻‍🔧 Dəstək", url=f"https://t.me/Neptun_Sohbet"),
+            InlineKeyboardButton(text="🔮 Yeniliklər", url=f"https://t.me/Neptun_Sohbet")
         ],
         [
             InlineKeyboardButton(text="💡 Komandalar", callback_data="settings_back_helper"),
