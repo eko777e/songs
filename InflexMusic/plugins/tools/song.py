@@ -260,9 +260,12 @@ async def song_download_cb(client, CallbackQuery, _):
 
     # Playlist kanalı
     PLAYLIST_USERNAME = "@UzeyirPlaylist"
+    playlist_button = InlineKeyboardMarkup(
+        [[InlineKeyboardButton(text="🎧 Playlist", url="https://t.me/UzeyirPlaylist")]]
+    )
 
     if stype == "video":
-        await mystic.edit_text(_["song_11"])  # Göndərilir yazısı
+        await mystic.edit_text(_["song_11"])  # "Göndərilir..." yazısı
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=enums.ChatAction.UPLOAD_VIDEO,
@@ -273,15 +276,16 @@ async def song_download_cb(client, CallbackQuery, _):
                 video=file_path,
                 duration=int(duration_sec),
                 caption=f"🎥 <b>Başlıq:</b> {title}\n\n📢: @ByTaGiMusicBot",
+                reply_markup=playlist_button
             )
-            await mystic.delete()  # "Göndərilir" yazısını silirik
+            await mystic.delete()
         except Exception:
             return await mystic.edit_text(_["song_10"])
         if os.path.exists(file_path):
             os.remove(file_path)
 
     elif stype == "audio":
-        await mystic.edit_text(_["song_11"])  # Göndərilir yazısı
+        await mystic.edit_text(_["song_11"])  # "Göndərilir..." yazısı
         await app.send_chat_action(
             chat_id=CallbackQuery.message.chat.id,
             action=enums.ChatAction.UPLOAD_AUDIO,
@@ -294,10 +298,11 @@ async def song_download_cb(client, CallbackQuery, _):
                 caption=f"🎵 <b>Mahnı:</b> {title}\n\n📢: @UzeyirMusic_Bot",
                 title=title,
                 performer="UzeyirMusic🇦🇿",
-                duration=int(duration_sec)
+                duration=int(duration_sec),
+                reply_markup=playlist_button
             )
 
-            # Playlist kanalına göndəririk
+            # Playlist kanalına göndəririk (düymə əlavə olunmayacaq)
             await client.send_audio(
                 chat_id=PLAYLIST_USERNAME,
                 audio=file_path,
@@ -309,12 +314,11 @@ async def song_download_cb(client, CallbackQuery, _):
                 duration=int(duration_sec)
             )
 
-            await mystic.delete()  # "Göndərilir" yazısını silirik
+            await mystic.delete()
         except Exception:
             return await mystic.edit_text(_["song_10"])
         if os.path.exists(file_path):
             os.remove(file_path)
-
 
 # 🔏 Bağla düyməsi callback
 @app.on_callback_query(filters.regex(pattern=r"song_close") & ~BANNED_USERS)
