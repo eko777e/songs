@@ -53,12 +53,12 @@ async def search_music(client: Client, message: Message):
 
         text = (
             "🎧 <b>Musiqi məlumatları tapıldı</b>\n"
-            f"🎵 Adı: {title}\n"
-            f"📢 Kanal: {uploader}\n"
-            f"👁️ Baxış: {views}\n"
-            f"📆 Tarix: {upload_date}\n"
-            f"🔗 Link: {url}\n\n"
-            "💻 Coded by: @Uzeyirrrrrrrrrr"
+            f"🎵 <b>Adı:</b> <code>{title}</code>\n"
+            f"📢 <b>Kanal:</b> {uploader}\n"
+            f"👁️ <b>Baxış:</b> {views}\n"
+            f"📆 <b>Tarix:</b> {upload_date}\n"
+            f"🔗 <b>Link:</b> {url}\n\n"
+            "💻 <b>Coded by:</b> @Uzeyirrrrrrrrrr"
         )
 
         await searching.edit_text(text, disable_web_page_preview=True)
