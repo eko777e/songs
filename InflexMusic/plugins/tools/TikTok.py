@@ -25,10 +25,10 @@ async def tiktok_handler(client, message: Message):
     link = message.text
 
     status_msg = await message.reply_text(
-        "🙋🏻‍♀️ **Zəhmət olmasa gözləyin**\n"
-        "💁🏻‍♀️ **Yüklənmə növü:** TikTok\n\n"
-        "📥 **Yüklənir:** `0%`\n"
-        "`░░░░░░░░░░`"
+        "🙋🏻‍♀️ <b>Zəhmət olmasa gözləyin</b>\n"
+        "💁🏻‍♀️ <b>Yüklənmə növü:</b> TikTok\n\n"
+        "📥 <b>Yüklənir:</b> <code>0%</code>\n"
+        "<code>░░░░░░░░░░</code>"
     )
 
     file_path = os.path.join(DOWNLOAD_DIR, f"tiktok_{message.id}.mp4")
@@ -80,10 +80,10 @@ async def tiktok_handler(client, message: Message):
                         bar = progress_bar(percent)
 
                         await status_msg.edit(
-                            "🙋🏻‍♀️ **Zəhmət olmasa gözləyin**\n"
-                            "💁🏻‍♀️ **Yüklənmə növü:** TikTok\n\n"
-                            f"📥 **Yüklənir:** `{percent:.1f}%`\n"
-                            f"`{bar}`"
+                            "🙋🏻‍♀️ <b>Zəhmət olmasa gözləyin</b>\n"
+                            "💁🏻‍♀️ <b>Yüklənmə növü:</b> TikTok\n\n"
+                            f"📥 <b>Yüklənir:</b> <code>{percent:.1f}%</code>\n"
+                            f"<code>{bar}</code>"
                         )
                 except:
                     pass
@@ -93,8 +93,8 @@ async def tiktok_handler(client, message: Message):
         # ===== PRIVATE VIDEO MESSAGE =====
         if private_video:
             await status_msg.edit(
-                "🙋🏻‍♀️ **Göndərdiyiniz video linki TikTok private hesabında olduğundan yükləyə bilmirəm**\n"
-                "💁🏻‍♀️ **Əgər bunun xəta olduğunu irad edirsinizsə, bizimlə əlaqə saxlayın**"
+                "🙋🏻‍♀️ <b>Göndərdiyiniz video linki TikTok private hesabında olduğundan yükləyə bilmirəm</b>\n"
+                "💁🏻‍♀️ <b>Əgər bunun xəta olduğunu irad edirsinizsə, bizimlə əlaqə saxlayın</b>"
             )
             if os.path.exists(file_path):
                 os.remove(file_path)
@@ -103,8 +103,8 @@ async def tiktok_handler(client, message: Message):
         # ===== FILE CHECK =====
         if not os.path.exists(file_path):
             await status_msg.edit(
-                "🙋🏻‍♀️ **Göndərdiyiniz video linki TikTok private hesabında olduğundan yükləyə bilmirəm**\n"
-                "💁🏻‍♀️ **Əgər bunun xəta olduğunu irad edirsinizsə, bizimlə [əlaqə](https://t.me/AxtarmaTagYoxdu) saxlayın**"
+                "🙋🏻‍♀️ <b>Göndərdiyiniz video linki TikTok private hesabında olduğundan yükləyə bilmirəm</b>\n"
+                "💁🏻‍♀️ <b>Əgər bunun xəta olduğunu irad edirsinizsə, bizimlə [əlaqə](https://t.me/Uzeyirrrrrrrrrr) saxlayın</b>"
             )
             return
 
@@ -112,8 +112,8 @@ async def tiktok_handler(client, message: Message):
             chat_id=message.chat.id,
             video=file_path,
             caption=(
-                "🙋🏻‍♀️ **Video hazırdır**\n"
-                "💁🏻‍♀️ **Platforma növ:** TikTok"
+                "🙋🏻‍♀️ <b>Video hazırdır</b>\n"
+                "💁🏻‍♀️ <b>Platforma növ:</b> <code>TikTok</code>"
             )
         )
 
