@@ -52,7 +52,7 @@ async def search_music(client: Client, message: Message):
             upload_date = f"{upload_date[:4]}-{upload_date[4:6]}-{upload_date[6:]}"
 
         text = (
-            "🎧 <b>Musiqi məlumatları tapıldı</b>\n"
+            "🎧 <b>Musiqi məlumatları tapıldı</b>\n\n"
             f"🎵 <b>Adı:</b> <code>{title}</code>\n"
             f"📢 <b>Kanal:</b> {uploader}\n"
             f"👁️ <b>Baxış:</b> {views}\n"
