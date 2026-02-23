@@ -43,7 +43,7 @@ async def song_commad_group(client, message: Message, _):
             [
                 InlineKeyboardButton(
                     text="📚 Kömək",
-                    url=f"https://t.me/ByTaGiMusicBot?start=song",
+                    url=f"https://t.me/UzeyirMusic_Bot?start=song",
                 ),
             ]
         ]
