@@ -11,7 +11,7 @@ async def search_music(client: Client, message: Message):
     if len(message.command) < 2:
         return await message.reply_text(
             "<b>Axtarış etmək üçün musiqi adı yazmalısınız</b>\n"
-            "✅ <b>Format:</b> /search Üzeyir Mehdizadə - Qara Gözlər",
+            "✅ <b>Format:</b> <code>/search Üzeyir Mehdizadə - Qara Gözlər</code>",
             disable_web_page_preview=True
         )
 
