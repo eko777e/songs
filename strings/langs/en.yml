@@ -309,7 +309,7 @@ gban_12: "<b>Ümumi Qadağan Olunmuş İstifadəçilər:</b>\n\n"
 
 mahni_1: "🔍 <b>Musiqi axtarış edilir....</b>"
 mahni_2: "🎵 <b>Təsdiq edildi, Musiqi yüklənir....</b>"
-mahni_3: "⚠️ <b>Proses zamanı xəta baş verdi, Dəstək ilə əlaqə saxla: @BotAzDestek</b>"
+mahni_3: "⚠️ <b>Proses zamanı xəta baş verdi, Dəstək ilə əlaqə saxla: @Uzeyirrrrrrrrrr</b>"
 mahni_12: "✅ <b>Seçim edildi, Musiqi təqdim olunur</b>"
 song_1 : "Musiqi yükləmək üçün ilk öncə botun şəxsisinə daxil olmalısınız və bu zaman istifadə edə bilərsiniz,"
 song_2 : "<b>İstifadə:</b>\n\n/song Mahnı Adı və ya YouTube Linki"
@@ -322,4 +322,5 @@ song_8 : "🎵 <b>Musiqi yüklənilir...</b>"
 song_9 : "Youtube-DL-dən mahnı yükləmək alınmadı\n\n<b>Səbəb:</b> {0}"
 song_10 : "❌ <b>Telegrama serverlərdən yüklənmə prosesi alınmadı,</b>\n🧑🏼‍🔧 Dəstək: @BotAzDestek"
 song_11 : "✅ <b>Proses başa çatdı və göndərilir..</b>"
+
 
