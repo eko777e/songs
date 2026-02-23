@@ -87,7 +87,7 @@ start_4 : "⚠️ Məni ilk öncə istifadə etmək üçün qrupunuz SuperGroup 
 start_5 : "<b>Blok edilmiş söhbət ⚠️</b>\nSizin qrup bot bazasında blok edilib, Səbəbini bilmək üçün @BotAzDestek qrupuna bildirin.."
 start_6 : "🎧 <b>Mahnı infosu</b>\n\n🎵 <b>Başlıq :</b> {0}\n\n⏰ <b>Müddət :</b> {1}\n👀 <b>Baxış :</b> <code>{2}</code>\n🔃 <b>Yayımlanma tarixi :</b> {3}\n📢 <b>Kanal :</b> <a href={4}>{5}</a>\n"
 
-help_1: "<b>Music Yükləmək🇦🇿</b> üçün komandalar:\n\n🔮 <b>Komanda:</b> /song\n📜 <b>Nümunə:</b> <code>/song Üzeyir Qara gözlər</code>\n📚 <b> Açıqlama:</b>Yazdığınız musiqini yükləyər\n\nƏlavə funksiyalar bir müddət sonra təyin ediləcək.."
+help_1: "<b>Music Yükləmək🇦🇿</b> üçün komandalar:\n\n🔮 <b>Komanda:</b> /song\n📜 <b>Nümunə:</b> <code>/song Üzeyir Qara gözlər</code>\n📚 <b> Açıqlama:</b>Yazdığınız musiqini yükləyər\n🔮 <b>Komanda:</b> /search\n📜 <b>Nümunə:</b> <code>/search Üzeyir Qara gözlər</code>\n📚 <b> Açıqlama:</b>Yazdığınız musiqi haqqında sizə məlumat verər\n\n📢 Əlavə funksiyalar bir müddət sonra təyin ediləcək.."
 help_2: "<b>Kömək menyusu üçün aşağıda olan buttona daxil olun..</b>"
 
 lang_1: "🌐 <b>Bir dil seçin:</b>"
@@ -322,5 +322,6 @@ song_8 : "🎵 <b>Musiqi yüklənilir...</b>"
 song_9 : "Youtube-DL-dən mahnı yükləmək alınmadı\n\n<b>Səbəb:</b> {0}"
 song_10 : "❌ <b>Telegrama serverlərdən yüklənmə prosesi alınmadı,</b>\n🧑🏼‍🔧 Dəstək: @BotAzDestek"
 song_11 : "✅ <b>Proses başa çatdı və göndərilir..</b>"
+
 
 
