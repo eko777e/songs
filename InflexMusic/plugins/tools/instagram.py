@@ -26,10 +26,10 @@ async def instagram_handler(client, message: Message):
     link = message.text
 
     status_msg = await message.reply_text(
-        "🙋🏻‍♀️ <b>Zəhmət olmasa gözləyin</b>\n"
-        "💁🏻‍♀️ <b>Yüklənmə növü:</b> Instagram\n\n"
-        "📥 <b>Yüklənir:</b> <code>0%</code>\n"
-        "<code>░░░░░░░░░░</code>"
+        "🙋🏻‍♀️ **Zəhmət olmasa gözləyin**\n"
+        "💁🏻‍♀️ **Yüklənmə növü:** Instagram\n\n"
+        "📥 **Yüklənir:** `0%`\n"
+        "`░░░░░░░░░░`"
     )
 
     file_path = os.path.join(DOWNLOAD_DIR, f"{message.id}.mp4")
@@ -68,10 +68,10 @@ async def instagram_handler(client, message: Message):
                         bar = progress_bar(percent)
 
                         await status_msg.edit(
-                            "🙋🏻‍♀️ <b>Zəhmət olmasa gözləyin</b>\n"
-                            "💁🏻‍♀️ <b>Yüklənmə növü:</b> Instagram\n\n"
-                            f"📥 <b>Yüklənir:</b> <code>{percent:.1f}%</code>\n"
-                            f"<code>{bar}</code>"
+                            "🙋🏻‍♀️ **Zəhmət olmasa gözləyin**\n"
+                            "💁🏻‍♀️ **Yüklənmə növü:** Instagram\n\n"
+                            f"📥 **Yüklənir:** `{percent:.1f}%`\n"
+                            f"`{bar}`"
                         )
                 except:
                     pass
@@ -79,15 +79,15 @@ async def instagram_handler(client, message: Message):
         await process.wait()
 
         if not os.path.exists(file_path):
-            await status_msg.edit("❌ <b>Video yüklənə bilmədi</b>")
+            await status_msg.edit("❌ **Video yüklənə bilmədi**")
             return
 
         await client.send_video(
             chat_id=message.chat.id,
             video=file_path,
             caption=(
-                "🙋🏻‍♀️ <b>Video hazırdır</b>\n"
-                "💁🏻‍♀️ <b>Platforma növ:</b> <code>Instagram</code>"
+                "🙋🏻‍♀️ **Video hazırdır**\n"
+                "💁🏻‍♀️ **Platforma növ:** Instagram"
             )
         )
 
@@ -95,4 +95,4 @@ async def instagram_handler(client, message: Message):
         os.remove(file_path)
 
     except Exception as e:
-        await status_msg.edit(f"❌ Xəta baş verdi:\n<code>{e}</code>")
+        await status_msg.edit(f"❌ Xəta baş verdi:\n`{e}`")
