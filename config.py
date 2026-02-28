@@ -12,7 +12,7 @@ API_ID = int(getenv("API_ID", "24168862"))
 API_HASH = getenv("API_HASH", "916a9424dd1e58ab7955001ccc0172b3")
 
 # Get your token from @BotFather on Telegram.
-BOT_TOKEN = getenv("BOT_TOKEN", "8086093711:AAGWwjLZvOx4wDTu1N4Zv5E5uoR6h9rtKeM")
+BOT_TOKEN = getenv("BOT_TOKEN", "8465309717:AAERLZfaxGPegJB6ADl44J0rtDzyszMFR-4")
 
 # Get your mongo url from cloud.mongodb.com
 MONGO_DB_URI = getenv("MONGO_DB_URI", "mongodb+srv://agautevdragitevsvh:pJSptT6jE0pcw9a4@cluster0.de4uc.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0")
@@ -143,6 +143,7 @@ if SUPPORT_GROUP:
 SONG_DOWNLOAD_DURATION_LIMIT = int(
     time_to_seconds(f"{SONG_DOWNLOAD_DURATION}:00")
 )
+
 
 
 
